@@ -48,9 +48,9 @@ highlightListItems();
 
 function toggleStatus(e) 
 {
-    e.preventDefault();
-
     statusOutput.classList.toggle("hidden");
+
+    e.preventDefault();
 
     if (!statusOutput.classList.contains("hidden"))
     {
@@ -79,6 +79,7 @@ toggleButton.addEventListener("click", toggleStatus);
 // timerButton using addEventListener for 'click' and 'dblclick' [10].
 function startFlashing()
 {
+    if (intervalId !== null) return;
     intervalId = setInterval(() => {
         controlPanel.classList.toggle("hidden");
     }, 500);
@@ -87,6 +88,8 @@ function startFlashing()
 function stopFlashing()
 {
     clearInterval(intervalId);
+    intervalId = null;
+    controlPanel.classList.remove("hidden");
 }
 
 timerButton.addEventListener("click", startFlashing);
